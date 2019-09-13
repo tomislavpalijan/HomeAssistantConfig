@@ -1,0 +1,90 @@
+
+## VIEWS ##
+default_view:
+  name: HOME
+  icon: mdi:home
+  view: yes
+  entities:
+    - group.osramKitchen
+    - group.osramGabriela
+    - group.osramLiving
+    - group.osramWorking
+
+Climate:
+  name: CLIMATE
+  view: yes
+  entities:
+    - group.climate_daniel
+    - group.climate_wohnzimmer
+    
+#Other:
+#  name: WEATHER
+#  view: yes
+#  entities:
+#    - group.daily_forecast
+#    - group.weather_overview
+
+person_tracker:
+  name: At HOME
+  entities:
+    - device_tracker.iphone
+    - device_tracker.gearfit2ac67
+    - device_tracker.magdaleasiphone
+    - device_tracker.mamasiphone2
+    - device_tracker.iphonevondaniel
+    - device_tracker.iphone_2
+    
+climate:
+  entities:
+  - climate.heizung
+  
+
+climate_daniel:
+  name: Daniel's Zimmer
+  entities:
+    - climate.daniel
+    - sensor.daniel_humidity
+    - sensor.daniel_temperature
+    - sensor.daniel_tado_mode
+    - sensor.daniel_heating
+    - sensor.daniel_power
+        
+climate_wohnzimmer:
+  name: Wohnzimmer
+  entities:
+    - climate.wohnzimmer
+    - sensor.wohnzimmer_humidity
+    - sensor.wohnzimmer_temperature
+    - sensor.wohnzimmer_tado_mode
+    - sensor.wohnzimmer_heating
+    - sensor.wohnzimmer_power
+
+osramKitchen:
+  name: Kitchen
+  entities:
+    - light.kuche
+
+osramGabriela:
+  name: Room Gabriela
+  entities:
+    - light.gabis_fenster
+    - light.gabis_tisch
+
+#bedroom:
+#  name: Parents
+#  entities:
+#    - light.led_stripe
+
+
+osramLiving:
+  name: Living
+  entities:
+    - light.esstisch
+    - light.lampe
+    - light.wohnfemster
+
+osramWorking:
+  name: Office
+  entities:
+    - light.arbeitstisch
+    - light.tvandpc

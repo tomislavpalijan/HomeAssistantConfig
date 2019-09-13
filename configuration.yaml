@@ -1,0 +1,182 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: !secret home_name
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 247
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Berlin
+  #customize: !include customize.yaml
+
+# Enables configuration UI
+config:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+hacs:
+  token : !secret hacs_token
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: HeAtHp#1005
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+
+# Discover some devices automatically
+discovery:
+
+device_tracker:
+  - platform: fritz
+    username: !secret fritz_username
+    password: !secret fritz_password
+    track_new_devices: yes
+
+# Enables the frontend
+frontend:
+
+# Enables support for tracking state changes over time.
+history:
+
+# for ios app 
+ios:
+
+# added with the ios 
+zeroconf:
+
+homekit:
+  auto_start: false
+  filter:
+    include_entities:
+      - light.arbeitstisch
+      - light.esstisch
+      - light.gabis_fenster
+      - light.gabis_tisch
+      - light.kuche
+      - light.lampe
+      - light.tvandpc
+      - light.wohnfemster
+      - light.shelly_shsw_1_12ba71
+
+# Full configuration.yaml entry
+#history_graph:
+#  gr1:
+#    name: Lights 7 days
+#    entities:
+#      - light.esstisch
+#      - light.kuche
+#    hours_to_show: 168
+#    refresh: 60
+#  gr2:
+#    name: Lights 30 days
+#    entities:
+#      - light.esstisch
+#      - light.kuche
+#    hours_to_show: 720
+#    refresh: 600
+#  gr3:
+#    name: Temperature 7 days
+#    entities:
+#      - sensor.heizung_temperature
+#      - sensor.pws_temp_c
+#      - sensor.pws_dewpoint_c
+#    hours_to_show: 168
+#    refresh: 600
+#  gr4:
+#    name: Net Speed 21 Days
+#    entities:
+#      - sensor.speedtest_download
+#      - sensor.speedtest_upload
+#      - sensor.speedtest_ping
+#    hours_to_show: 504
+#    refresh: 600
+
+
+light:
+  - platform: osramlightify
+    host: 192.168.178.26
+    allow_lightify_groups: true
+    
+logger:
+  default: info
+  
+# View all events in a logbook
+logbook:
+
+# Example configuration.yaml entry
+mqtt:
+  broker: a0d7b954-mqtt
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  client_id: home-assistant
+
+# Example configuration.yaml entry
+# shelly1-12BA71
+switch:
+  - platform: mqtt
+    name: bedroom
+    state_topic: "shellies/shelly1-12BA71/relay/0"
+    command_topic: "shellies/shelly1-12BA71/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+
+sensor:
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    # If errors occur, remove degree symbol below
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+
+shelly:
+  discovery: true  #add all devices (default)
+  username: !secret shelly_username
+  password: !secret shelly_password
+  sensors:
+    - all #show all sensors
+  devices:  #configure devices
+    - id: 12BA71
+      light_switch: true  #add this switch as a light
+      name: Bed room light #set friendly name
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 180
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+# Track the sun
+sun:
+
+system_health:
+  
+tado:
+  username: !secret tado_username
+  password: !secret tado_password
+
+# Text to speech
+tts:
+  platform: google_translate
+  
+weather:
+  - platform: openweathermap
+    api_key: !secret weather_api_key
+
+group: !include groups.yaml
+automation: !include automations.yaml
+
+
