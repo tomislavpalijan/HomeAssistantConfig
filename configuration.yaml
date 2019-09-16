@@ -12,6 +12,8 @@ homeassistant:
   time_zone: Europe/Berlin
   #customize: !include customize.yaml
 
+# just for git pull testing 14.09.2019 02:00 
+
 # Enables configuration UI
 config:
 
