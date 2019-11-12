@@ -70,6 +70,7 @@ homekit:
       - light.tvandpc
       - light.wohnfemster
       - light.shelly_shsw_1_12ba71
+      - light.tradfri_driver
 
 # Full configuration.yaml entry
 #history_graph:

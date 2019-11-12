@@ -81,6 +81,7 @@ osramLiving:
   entities:
     - light.esstisch
     - light.lampe
+    - light.tradfri_driver
     - light.wohnfemster
 
 osramWorking:
